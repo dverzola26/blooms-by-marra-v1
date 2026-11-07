@@ -41,7 +41,7 @@ export default function Checkout() {
     <section className={`section ${styles.flow}`}>
       <header className={styles.heading}>
         <h1>Demo checkout</h1>
-        <p>Use fictional contact details to try the checkout form.</p>
+        <p>Sample contact details are filled in for you. Choose a date to try checkout.</p>
       </header>
       <p className={styles.demoNotice}>
         Demo only — no order or payment will be submitted. Nothing is sent to a store or payment provider.
@@ -193,6 +193,7 @@ export default function Checkout() {
                     Your name
                     <input
                       name="customer"
+                      defaultValue="Demo Sender"
                       autoComplete="name"
                       required
                       maxLength={100}
@@ -202,6 +203,7 @@ export default function Checkout() {
                     Email
                     <input
                       name="email"
+                      defaultValue="sender@example.com"
                       type="email"
                       autoComplete="email"
                       required
@@ -211,6 +213,7 @@ export default function Checkout() {
                     Mobile number
                     <input
                       name="phone"
+                      defaultValue="09123456789"
                       type="tel"
                       placeholder="09XXXXXXXXX"
                       required
@@ -218,7 +221,7 @@ export default function Checkout() {
                   </label>
                   <label>
                     {mode === "delivery" ? "Recipient" : "Pickup contact"} name
-                    <input name="recipient" required maxLength={100} />
+                    <input name="recipient" defaultValue="Demo Recipient" required maxLength={100} />
                   </label>
                 </div>
                 {mode === "delivery" && (
@@ -226,6 +229,7 @@ export default function Checkout() {
                     Complete recipient address
                     <textarea
                       name="address"
+                      defaultValue="123 Sample Street, Demo Barangay"
                       required
                       maxLength={500}
                       placeholder="House / unit, street, barangay, landmark"
@@ -239,6 +243,7 @@ export default function Checkout() {
                   Recipient mobile number
                   <input
                     name="recipientPhone"
+                    defaultValue="09123456789"
                     type="tel"
                     pattern="(\+63|0)9[0-9]{9}"
                     placeholder="09XXXXXXXXX"

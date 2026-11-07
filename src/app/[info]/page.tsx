@@ -12,7 +12,7 @@ const pages: Record<
     sections: [
       [
         "Your everyday florist for every occasion",
-        "A place for thoughtful flowers and meaningful moments. Our branches serve Metro Manila and Pampanga through local teams.",
+        "Our local teams serve Metro Manila and Pampanga from our Valenzuela and Angeles branches.",
       ],
       [
         "A story still unfolding",
@@ -33,15 +33,15 @@ const pages: Record<
         "Pampanga fees and product availability are branch-specific. Metro Manila delivery inclusion does not automatically apply. Outside-area deliveries cannot be guaranteed.",
       ],
       [
-        "A little planning goes a long way",
+        "Same-day requests",
         "Same-day delivery requests depend on flower availability, delivery capacity and shop confirmation. Please ask the shop about the current request cutoff. Pickup is handled separately.",
       ],
       [
-        "Prefer to stop by?",
+        "Store pickup",
         "Choose pickup and your preferred branch, date and window. Pickup carries no delivery fee and follows separate availability rules.",
       ],
       [
-        "Included means included",
+        "Delivery fees",
         "Where a product includes delivery for your city, checkout will not add another delivery fee. Standees use destination-city rates. Custom and rush arrangements require review.",
       ],
     ],

@@ -16,8 +16,8 @@ export default function Cart() {
       </p>
       {!lines.length ? (
         <div className="empty">
-          <h2>A little room for something lovely.</h2>
-          <p>Your demo cart is empty.</p>
+          <h2>Your demo cart is empty</h2>
+          <p>Choose a sample arrangement to try checkout.</p>
           <Link className="button" href="/shop">
             Explore flowers <Arrow />
           </Link>
@@ -75,7 +75,7 @@ export default function Cart() {
               checkout. Custom arrangements require a quote.
             </p>
             <Link className="button full" href="/checkout">
-              Rehearse checkout <Arrow />
+              Try demo checkout <Arrow />
             </Link>
             <p className="muted">
               No real order will be submitted. No payment will be taken.

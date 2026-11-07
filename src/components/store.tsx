@@ -173,7 +173,6 @@ export function Shell({ children }: { children: React.ReactNode }) {
       <footer>
         <div>
           <div className="footer-brand">BLOOMS BY MARRA</div>
-          <p>A little thought. A beautiful gesture.</p>
           <p className="muted">Your everyday florist for every occasion.</p>
         </div>
         <div>
@@ -191,7 +190,7 @@ export function Shell({ children }: { children: React.ReactNode }) {
         </div>
         <div className="footer-bottom">
           © {new Date().getFullYear()} Blooms by Marra{" "}
-          <span>Demo storefront · Made with thoughtfulness</span>
+          <span>Demo storefront</span>
         </div>
       </footer>
     </>
