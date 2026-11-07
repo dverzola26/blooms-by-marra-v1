@@ -2,6 +2,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useStore } from "@/components/store";
+import styles from "../cart/flow.module.css";
 import {
   checkoutSchema,
   cities,
@@ -28,25 +29,26 @@ export default function Checkout() {
   }
   if (!lines.length)
     return (
-      <section className="section empty">
-        <h1>Your flowers come first.</h1>
-        <p>Add a demo arrangement before rehearsing checkout.</p>
+      <section className={`section empty ${styles.flow}`}>
+        <h1>Your demo cart is empty</h1>
+        <p>Add a sample arrangement to try checkout.</p>
         <Link className="button" href="/shop">
           Browse flowers
         </Link>
       </section>
     );
   return (
-    <section className="section">
-      <p className="eyebrow">CHECKOUT REHEARSAL · NO REAL TRANSACTION</p>
-      <h1>The finishing touches</h1>
-      <p className="intro">
-        Try the journey using fictional contact details. Nothing here is sent to
-        a store or payment provider.
+    <section className={`section ${styles.flow}`}>
+      <header className={styles.heading}>
+        <h1>Demo checkout</h1>
+        <p>Use fictional contact details to try the checkout form.</p>
+      </header>
+      <p className={styles.demoNotice}>
+        Demo only — no order or payment will be submitted. Nothing is sent to a store or payment provider.
       </p>
       {result ? (
         <div className="confirmation" role="status">
-          <h2>Rehearsal complete</h2>
+          <h2>Demo request reviewed</h2>
           <p>{result}</p>
           <p>
             No order was saved, no stock reserved, no payment requested and no
@@ -54,7 +56,7 @@ export default function Checkout() {
           </p>
           <div className="actions">
             <button className="button" onClick={() => setResult("")}>
-              Edit rehearsal
+              Edit demo request
             </button>
             <Link className="text-link" href="/status">
               Explore status guidance
@@ -112,7 +114,7 @@ export default function Checkout() {
                 </div>
               )}
               <fieldset>
-                <legend>01 · Delivery or a little visit?</legend>
+                <legend>Delivery or pickup</legend>
                 <div className="segmented">
                   {(["delivery", "pickup"] as const).map((v) => (
                     <button
@@ -185,7 +187,7 @@ export default function Checkout() {
                 </p>
               </fieldset>
               <fieldset>
-                <legend>02 · From you, to them</legend>
+                <legend>Contact and recipient</legend>
                 <div className="two-col">
                   <label>
                     Your name
@@ -249,7 +251,7 @@ export default function Checkout() {
                 </label>
               </fieldset>
               <fieldset>
-                <legend>03 · Payment preference</legend>
+                <legend>Payment preference</legend>
                 <label>
                   Preferred method
                   <select
@@ -260,7 +262,7 @@ export default function Checkout() {
                       "GCash",
                       "Maya",
                       "GoTyme",
-                      "MariBank",
+                      "QR Ph",
                       ...(mode === "pickup" ? ["Cash"] : []),
                     ].map((v) => (
                       <option key={v}>{v}</option>
@@ -274,7 +276,7 @@ export default function Checkout() {
                 </p>
               </fieldset>
               <fieldset>
-                <legend>04 · Review before continuing</legend>
+                <legend>Review before continuing</legend>
                 <label className="checkbox">
                   <input type="checkbox" name="consent" required />
                   <span>
@@ -286,7 +288,7 @@ export default function Checkout() {
               </fieldset>
             </div>
             <aside className="summary">
-              <h2>Your rehearsal summary</h2>
+              <h2>Demo order summary</h2>
               {pricingError ? (
                 <p className="error" role="alert">
                   {pricingError}
@@ -318,11 +320,11 @@ export default function Checkout() {
                 </>
               )}
               <p>
-                All figures are fixtures, not approved offers. Branches cannot
-                be combined automatically.
+                These are sample prices and are not available for purchase.
+                Branches cannot be combined automatically.
               </p>
               <button className="button full" type="submit">
-                Validate demo request
+                Review demo request
               </button>
               <p className="muted">No backend order or payment is created.</p>
             </aside>

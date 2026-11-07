@@ -1,11 +1,13 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { ArrowUpRight, ChevronDown, MapPin, MessageCircle, Store, Truck } from "lucide-react";
+import styles from "@/components/info-layout.module.css";
 const pages: Record<
   string,
   { title: string; kicker: string; sections: [string, string][] }
 > = {
   about: {
-    title: "Every gesture has a story.",
+    title: "About Blooms by Marra",
     kicker: "BLOOMS BY MARRA",
     sections: [
       [
@@ -19,12 +21,12 @@ const pages: Record<
     ],
   },
   delivery: {
-    title: "From our hands to yours.",
+    title: "Delivery and pickup",
     kicker: "DELIVERY & PICKUP",
     sections: [
       [
         "Metro Manila · Valenzuela branch",
-        "Delivery coverage and city-level fees will be confirmed by the owner before launch. The checkout currently uses a limited, clearly labeled fixture matrix.",
+        "The Valenzuela branch serves Metro Manila. Many regular online bouquet prices include delivery within the applicable area; the shop confirms availability and any fees. This preview uses sample checkout rates.",
       ],
       [
         "Pampanga · Angeles branch",
@@ -32,7 +34,7 @@ const pages: Record<
       ],
       [
         "A little planning goes a long way",
-        "Same-day availability depends on local stock, staff capacity and routing. Requests at or after the configured cutoff need approval. The public cutoff is awaiting owner confirmation.",
+        "Same-day delivery requests depend on flower availability, delivery capacity and shop confirmation. Please ask the shop about the current request cutoff. Pickup is handled separately.",
       ],
       [
         "Prefer to stop by?",
@@ -45,7 +47,7 @@ const pages: Record<
     ],
   },
   contact: {
-    title: "Let’s make it personal.",
+    title: "Contact and branches",
     kicker: "CONTACT & BRANCHES",
     sections: [
       [
@@ -54,22 +56,25 @@ const pages: Record<
       ],
       [
         "Valenzuela · Metro Manila",
-        "Pickup address, map pin, contact number and current opening hours await owner verification.",
+        "111 McArthur Highway, Marulas, Valenzuela, Philippines. Open 8:00 AM–8:00 PM. Please contact the shop for pickup instructions.",
       ],
       [
         "Angeles · Pampanga",
-        "Pickup address, map pin, contact number and current opening hours await owner verification.",
+        "Galang-Wong Building, Salome Street, Brgy. Balibago, Angeles City, Pampanga. Open 8:00 AM–8:00 PM. Please contact the shop to confirm the address and pickup instructions.",
       ],
       [
         "Custom arrangements",
-        "Share your occasion, preferred colors, budget, branch and date with the team. Custom and rush work requires a confirmed quote and availability review.",
+        "Hi po! Share your occasion, preferred date and time, delivery or pickup, location, budget and preferred flowers or design. Reference photos are inspiration; the shop will confirm availability and the final quote.",
       ],
     ],
   },
   faq: {
-    title: "A few thoughtful answers.",
+    title: "Frequently asked questions",
     kicker: "FREQUENTLY ASKED QUESTIONS",
     sections: [
+      ["What are your hours?", "We are open from 8:00 AM to 8:00 PM. Inquiries can be sent outside operating hours; availability and pricing require confirmation."],
+      ["Do you offer same-day delivery?", "Same-day requests are subject to availability and shop confirmation. Please ask the shop about the current request cutoff. Pickup follows separate availability rules."],
+      ["What payment methods are accepted?", "GCash, GoTyme, QR Ph and Maya are accepted. Cash is available for pickup only; cash on delivery is not offered. The shop confirms payment instructions and the required amount."],
       [
         "Is this a live shop?",
         "This is a working demo storefront. The catalog, prices and bouquet imagery are illustrative. No live orders or payments are accepted.",
@@ -93,7 +98,7 @@ const pages: Record<
     ],
   },
   policies: {
-    title: "Clear expectations. Thoughtful care.",
+    title: "Draft policies and privacy",
     kicker: "DRAFT POLICIES · NOT LAUNCH-APPROVED",
     sections: [
       [
@@ -119,6 +124,13 @@ const pages: Record<
     ],
   },
 };
+const introductions: Record<string, string> = {
+  about: "Flowers for everyday gestures and the occasions you want to remember.",
+  delivery: "Choose delivery or pickup. Every request is subject to confirmation.",
+  contact: "Find a branch or ask about an arrangement.",
+  faq: "Answers about requests, delivery, pickup and payment review.",
+  policies: "Please review these draft policies with the shop before making plans.",
+};
 export function generateStaticParams() {
   return Object.keys(pages).map((info) => ({ info }));
 }
@@ -131,31 +143,59 @@ export default async function Info({
   const p = pages[info];
   if (!p) notFound();
   return (
-    <section className="section info-page">
-      <p className="eyebrow">{p.kicker}</p>
-      <h1>{p.title}</h1>
-      <div className="info-grid">
-        {p.sections.map(([h, t]) => (
-          <article key={h}>
-            <h2>{h}</h2>
-            <p>{t}</p>
-          </article>
-        ))}
+    <div className={styles.page}>
+      <div className={styles.hero}>
+        <div className={styles.heroInner}>
+          <h1>{p.title}</h1>
+          <p>{introductions[info]}</p>
+          {info === "policies" && <span className={styles.draft}>Draft · subject to owner and legal review</span>}
+        </div>
       </div>
-      {info === "contact" ? (
-        <a
-          className="button"
-          href="https://www.facebook.com/bloomsbymarra/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Contact on Facebook ↗
-        </a>
-      ) : (
-        <Link className="button" href="/shop">
-          Explore the demo flowers
-        </Link>
-      )}
-    </section>
+
+      <section className={styles.content} aria-label={p.kicker}>
+        {info === "contact" ? (
+          <>
+            <div className={styles.sectionIntro}>
+              <div><h2>Our branches</h2><p>Contact the shop to confirm branch details before visiting.</p></div>
+              <Store aria-hidden="true" size={28} strokeWidth={1.4} />
+            </div>
+            <div className={styles.branches}>
+              {p.sections.slice(1, 3).map(([h, t]) => (
+                <article className={styles.branch} key={h}>
+                  <MapPin aria-hidden="true" size={22} strokeWidth={1.5} />
+                  <h3>{h}</h3><p>{t}</p>
+                </article>
+              ))}
+            </div>
+            <div className={styles.contactPanel}>
+              <MessageCircle aria-hidden="true" size={28} strokeWidth={1.4} />
+              <div><h2>{p.sections[0][0]}</h2><p>{p.sections[0][1]}</p>
+                <a className={styles.textLink} href="https://www.facebook.com/bloomsbymarra/" target="_blank" rel="noopener noreferrer">Contact on Facebook <ArrowUpRight size={16} aria-hidden="true" /></a>
+              </div>
+            </div>
+            <article className={styles.readingRow}><h2>{p.sections[3][0]}</h2><p>{p.sections[3][1]}</p></article>
+          </>
+        ) : info === "faq" ? (
+          <div className={styles.faqList}>
+            {p.sections.map(([h, t]) => (
+              <details key={h} className={styles.faqItem}>
+                <summary><span>{h}</span><ChevronDown aria-hidden="true" size={20} /></summary>
+                <p>{t}</p>
+              </details>
+            ))}
+          </div>
+        ) : (
+          <>
+            {info === "delivery" && <div className={styles.serviceStrip}><Truck size={23} aria-hidden="true" /> Delivery subject to confirmation <span aria-hidden="true">·</span> <Store size={23} aria-hidden="true" /> Pickup at your chosen branch</div>}
+            <div className={styles.readingList}>
+              {p.sections.map(([h, t]) => (
+                <article className={styles.readingRow} key={h}><h2>{h}</h2><p>{t}</p></article>
+              ))}
+            </div>
+          </>
+        )}
+        {info !== "contact" && <div className={styles.footerAction}><p>Browse the sample collection.</p><Link className="button" href="/shop">Explore the demo flowers</Link></div>}
+      </section>
+    </div>
   );
 }

@@ -10,6 +10,8 @@ export type Product = {
   name: string;
   occasion: string;
   occasionTags?: string[];
+  category: "blooms" | "funeral-flowers" | "inaugural-flowers";
+  bloomType?: "local-roses" | "china-roses";
   type: "bouquet" | "standee";
   price: number;
   branch: Branch;
@@ -19,6 +21,7 @@ export type Product = {
 export const products: Product[] = [
   {
     id: "blush-study",
+    category: "blooms",
     name: "Blush garden study",
     occasion: "Birthday",
     type: "bouquet",
@@ -28,6 +31,7 @@ export const products: Product[] = [
   },
   {
     id: "rose-study",
+    category: "blooms",
     name: "Rose poetry study",
     occasion: "Anniversary",
     occasionTags: ["Love & Romance"],
@@ -38,6 +42,7 @@ export const products: Product[] = [
   },
   {
     id: "sunshine-study",
+    category: "blooms",
     name: "Sunlit meadow study",
     occasion: "Congratulations",
     occasionTags: ["Get Well Soon"],
@@ -48,6 +53,7 @@ export const products: Product[] = [
   },
   {
     id: "ivory-study",
+    category: "funeral-flowers",
     name: "Ivory tribute study",
     occasion: "Sympathy",
     type: "standee",
@@ -57,6 +63,7 @@ export const products: Product[] = [
   },
   {
     id: "custom-study",
+    category: "blooms",
     name: "Your own floral story",
     occasion: "Custom",
     type: "bouquet",
@@ -179,7 +186,7 @@ export const checkoutSchema = z
       .regex(/^(?:\+63|0)9\d{9}$/, "Enter a recipient mobile number."),
     address: z.string().max(500),
     mode: z.enum(["delivery", "pickup"]),
-    payment: z.enum(["GCash", "Maya", "GoTyme", "MariBank", "Cash"]),
+    payment: z.enum(["GCash", "Maya", "GoTyme", "MariBank", "QR Ph", "Cash"]),
     date: z.iso.date(),
     window: z.enum(["Morning", "Afternoon"]),
     consent: z.literal(true),

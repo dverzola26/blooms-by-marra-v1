@@ -3,35 +3,39 @@ import Link from "next/link";
 import { useState } from "react";
 import { Bouquet, useStore, Arrow } from "./store";
 import { money, productImages, type Product } from "@/lib/commerce";
+import styles from "./storefront-redesign.module.css";
 export function ProductDetail({ product: p }: { product: Product }) {
   const { add } = useStore();
   const [message, setMessage] = useState("");
   const [added, setAdded] = useState(false);
   return (
-    <section className="section">
+    <section className={`section ${styles.detail}`}>
       <Link className="text-link" href="/shop">
         ← Back to the collection
       </Link>
-      <div className="detail-layout">
+      <p className={styles.demoNotice}>
+        Demo only — this is an illustrative arrangement. Orders and payments are
+        disabled.
+      </p>
+      <div className={`detail-layout ${styles.detailLayout}`}>
         <Bouquet src={productImages[p.id]} priority />
         <div>
-          <p className="eyebrow">DEMO ARRANGEMENT · {p.occasion}</p>
+          <p className={styles.sampleLabel}>Demo arrangement · {p.occasion}</p>
           <h1>{p.name}</h1>
           <p className="detail-price">
             {p.custom ? "Quote required" : money(p.price)}{" "}
             <small>{p.custom ? "" : "sample price only"}</small>
           </p>
           <p>
-            A floral concept for a thoughtful gesture. Names, prices and imagery
-            are illustrative; the approved catalog will define the actual
-            flowers, sizes and availability.
+            This sample uses illustrative names, prices and imagery. The approved
+            catalog will show actual flowers, sizes and availability.
           </p>
           <p className="notice">
             Demo branch:{" "}
             {p.branch === "angeles" ? "Angeles, Pampanga" : "Valenzuela"}.{" "}
             {p.included.length
               ? "Sample delivery inclusion: Valenzuela only."
-              : "Delivery fees are calculated separately in the rehearsal."}
+              : "A sample delivery fee is calculated separately at checkout."}
           </p>
           <label>
             A little note from you
@@ -57,7 +61,7 @@ export function ProductDetail({ product: p }: { product: Product }) {
           </button>
           {added && (
             <p role="status">
-              A thoughtful choice.{" "}
+              Added to your demo cart.{" "}
               <Link href="/cart">View your demo cart →</Link>
             </p>
           )}

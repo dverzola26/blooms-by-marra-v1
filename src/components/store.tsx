@@ -14,7 +14,6 @@ import {
   Search,
   Minus,
   Plus,
-  ChevronDown,
   Store,
   Heart,
 } from "lucide-react";
@@ -129,7 +128,7 @@ export function Shell({ children }: { children: React.ReactNode }) {
           {[
             ["/", "Home"],
             ["/shop", "Shop flowers"],
-            ["/shop?occasion=Birthday", "Occasions"],
+            ["/delivery", "Delivery & pickup"],
             ["/about", "About"],
             ["/faq", "FAQ"],
             ["/contact", "Contact"],
@@ -141,9 +140,6 @@ export function Shell({ children }: { children: React.ReactNode }) {
               onClick={() => setOpen(false)}
             >
               {text}
-              {(text === "Shop flowers" || text === "Occasions") && (
-                <ChevronDown size={12} />
-              )}
             </Link>
           ))}
         </nav>

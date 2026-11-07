@@ -1,0 +1,157 @@
+.flow {
+  padding-top: clamp(2rem, 5vw, 4.5rem);
+  padding-bottom: clamp(4rem, 7vw, 6rem);
+}
+
+.flow .heading {
+  display: block;
+  height: auto;
+  max-width: none;
+  margin: 0;
+  border: 0;
+  padding: clamp(2rem, 4vw, 3.5rem);
+  background: #f8e8e3;
+  border-radius: 0;
+}
+
+.heading h1 {
+  margin: 0;
+  font-size: clamp(2.7rem, 5.5vw, 4.8rem);
+  line-height: 1.04;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+}
+
+.heading p {
+  margin: 0.85rem 0 0;
+  color: #634038;
+  font-size: clamp(1rem, 1.3vw, 1.15rem);
+}
+
+.demoNotice {
+  margin: 1.5rem 0 0;
+  padding: 1rem 1.25rem;
+  color: #532c25;
+  background: #f7e4de;
+  border-radius: 0;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.itemsHeading {
+  margin: 0 0 0.5rem;
+  font-size: clamp(1.55rem, 2.5vw, 2rem);
+}
+
+.sampleBadge {
+  display: inline-block;
+  padding: 0.25rem 0.6rem;
+  background: #f6dfda;
+  color: #63352e;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.flow :global(.cart-layout),
+.flow :global(.checkout-layout) {
+  grid-template-columns: minmax(0, 1.6fr) minmax(18rem, 0.85fr);
+  gap: clamp(2rem, 5vw, 4.5rem);
+  margin-top: 2.5rem;
+}
+
+.flow :global(.cart-item) {
+  grid-template-columns: minmax(100px, 150px) minmax(0, 1fr);
+  gap: clamp(1rem, 3vw, 1.75rem);
+  padding: 1.5rem 0;
+}
+
+.flow :global(.cart-item h3) {
+  margin: 0.5rem 0;
+  font-size: clamp(1.25rem, 2vw, 1.55rem);
+}
+
+.flow :global(.cart-item p) {
+  margin: 0.5rem 0 0.8rem;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.flow :global(.summary) {
+  padding: clamp(1.5rem, 3vw, 2rem);
+  background: #f9ece7;
+  border: 0;
+  border-radius: 0;
+}
+
+.flow :global(.summary h2) {
+  margin: 0 0 0.5rem;
+  font-size: clamp(1.6rem, 2.5vw, 2rem);
+}
+
+.flow :global(.summary p),
+.flow :global(.summary-row) {
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
+.flow :global(.summary .button) {
+  margin-top: 0.75rem;
+  min-height: 48px;
+}
+
+.flow :global(.checkout-layout fieldset) {
+  margin: 0 0 2rem;
+  padding: 0 0 2rem;
+}
+
+.flow :global(.checkout-layout legend) {
+  margin-bottom: 1rem;
+  font-size: clamp(1.45rem, 2.2vw, 1.8rem);
+}
+
+.flow :global(.checkout-layout label),
+.flow :global(.checkout-layout fieldset p) {
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.flow :global(.error) {
+  border: 1px solid #9d342f;
+  border-radius: 10px;
+  font-size: 0.95rem;
+}
+
+.flow :global(.confirmation) {
+  margin-top: 2.5rem;
+}
+
+@media (max-width: 760px) {
+  .flow :global(.cart-layout),
+  .flow :global(.checkout-layout) {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+
+  .flow :global(.summary) {
+    position: static;
+  }
+
+  .flow :global(.cart-item .bouquet) {
+    height: 135px;
+    min-height: 135px;
+  }
+}
+
+@media (max-width: 420px) {
+  .flow :global(.cart-item) {
+    grid-template-columns: 100px minmax(0, 1fr);
+  }
+
+  .flow :global(.remove) {
+    display: block;
+    margin: 0.5rem 0 0;
+  }
+}
