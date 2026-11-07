@@ -2,16 +2,22 @@
 import Link from "next/link";
 import { useStore, Quantity, Bouquet, Arrow } from "@/components/store";
 import { products, productImages, money } from "@/lib/commerce";
+import styles from "./flow.module.css";
 export default function Cart() {
   const { lines, quantity, clear } = useStore();
   return (
-    <section className="section">
-      <p className="eyebrow">A LITTLE SOMETHING, CHOSEN WITH LOVE</p>
-      <h1>Your demo flower bag</h1>
+    <section className={`section ${styles.flow}`}>
+      <header className={styles.heading}>
+        <h1>Your demo cart</h1>
+        <p>A sample selection to explore the checkout experience.</p>
+      </header>
+      <p className={styles.demoNotice}>
+        Demo only — these arrangements are illustrative. No real order or payment can be made.
+      </p>
       {!lines.length ? (
         <div className="empty">
-          <h2>A little room for something lovely.</h2>
-          <p>Your demo cart is empty.</p>
+          <h2>Your demo cart is empty</h2>
+          <p>Choose a sample arrangement to try checkout.</p>
           <Link className="button" href="/shop">
             Explore flowers <Arrow />
           </Link>
@@ -19,6 +25,7 @@ export default function Cart() {
       ) : (
         <div className="cart-layout">
           <div>
+            <h2 className={styles.itemsHeading}>Your selected arrangements ({lines.reduce((sum, line) => sum + line.quantity, 0)})</h2>
             {lines.map((l) => {
               const p = products.find((p) => p.id === l.id)!;
               return (
@@ -27,11 +34,11 @@ export default function Cart() {
                     <Bouquet src={productImages[p.id]} />
                   </Link>
                   <div>
-                    <span className="eyebrow">DEMO · {p.branch}</span>
+                    <span className={styles.sampleBadge}>SAMPLE · {p.branch === "valenzuela" ? "Valenzuela" : "Angeles"}</span>
                     <Link href={`/shop/${p.id}`}>
                       <h3>{p.name}</h3>
                     </Link>
-                    <p>{p.custom ? "Quote required" : money(p.price)}</p>
+                    <p>{p.custom ? "Sample quote required" : `${money(p.price)} sample price`}</p>
                     {l.message && <p className="muted">Card: {l.message}</p>}
                     <Quantity id={l.id} value={l.quantity} />
                     <button
@@ -49,7 +56,7 @@ export default function Cart() {
             </button>
           </div>
           <aside className="summary">
-            <h2>Your thoughtful selection</h2>
+            <h2>Demo order summary</h2>
             <div className="summary-row">
               <span>Sample subtotal</span>
               <strong>
@@ -68,7 +75,7 @@ export default function Cart() {
               checkout. Custom arrangements require a quote.
             </p>
             <Link className="button full" href="/checkout">
-              Rehearse checkout <Arrow />
+              Try demo checkout <Arrow />
             </Link>
             <p className="muted">
               No real order will be submitted. No payment will be taken.

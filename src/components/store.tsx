@@ -14,7 +14,6 @@ import {
   Search,
   Minus,
   Plus,
-  ChevronDown,
   Store,
   Heart,
 } from "lucide-react";
@@ -129,7 +128,7 @@ export function Shell({ children }: { children: React.ReactNode }) {
           {[
             ["/", "Home"],
             ["/shop", "Shop flowers"],
-            ["/shop?occasion=Birthday", "Occasions"],
+            ["/delivery", "Delivery & pickup"],
             ["/about", "About"],
             ["/faq", "FAQ"],
             ["/contact", "Contact"],
@@ -141,9 +140,6 @@ export function Shell({ children }: { children: React.ReactNode }) {
               onClick={() => setOpen(false)}
             >
               {text}
-              {(text === "Shop flowers" || text === "Occasions") && (
-                <ChevronDown size={12} />
-              )}
             </Link>
           ))}
         </nav>
@@ -177,7 +173,6 @@ export function Shell({ children }: { children: React.ReactNode }) {
       <footer>
         <div>
           <div className="footer-brand">BLOOMS BY MARRA</div>
-          <p>A little thought. A beautiful gesture.</p>
           <p className="muted">Your everyday florist for every occasion.</p>
         </div>
         <div>
@@ -195,7 +190,7 @@ export function Shell({ children }: { children: React.ReactNode }) {
         </div>
         <div className="footer-bottom">
           © {new Date().getFullYear()} Blooms by Marra{" "}
-          <span>Demo storefront · Made with thoughtfulness</span>
+          <span>Demo storefront</span>
         </div>
       </footer>
     </>
